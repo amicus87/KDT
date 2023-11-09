@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Display</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plotly-chart"></div>
+    <script>
+        var graphJson = {{ graph_json|safe }};
+        Plotly.newPlot('plotly-chart', graphJson.data, graphJson.layout);
+    </script>
+
+    <h1>Hospital information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>병원명</th>
+                <th>구분</th>
+                <th>간략 구분</th>
+                <th>전화</th>
+                <th>우편번호</th>
+                <th>주소</th>
+                <th>읍면동</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in dashboard_hospital %}
+            <tr>
+                <td>{{ entry.id }} </td>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.type }}</td>
+                <td>{{ entry.type_short }}</td>
+                <td>{{ entry.tel }}</td>
+                <td>{{ entry.zip }}</td>
+                <td>{{ entry.add }}</td>
+                <td>{{ entry.place }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
